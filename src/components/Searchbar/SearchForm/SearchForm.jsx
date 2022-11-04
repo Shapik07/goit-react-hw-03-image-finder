@@ -18,6 +18,10 @@ export class SearchForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
+    if (this.state.query.trim() === '') {
+      return;
+    }
     this.props.handleQuerySubmit(this.state.query);
 
     this.setState({ query: '' });
