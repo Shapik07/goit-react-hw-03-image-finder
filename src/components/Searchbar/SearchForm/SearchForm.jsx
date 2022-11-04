@@ -8,9 +8,23 @@ import {
 } from './SearchForm.styled';
 
 export class SearchForm extends Component {
+  state = {
+    query: '',
+  };
+
+  handleQueryChange = e => {
+    this.setState({ query: e.currentTarget.value.toLowerCase() });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    this.setState({ query: '' });
+  };
+
   render() {
     return (
-      <StyledSearchForm className="form">
+      <StyledSearchForm className="form" onSubmit={this.handleSubmit}>
         <SearchFormButton type="submit" className="button">
           <FaSearch />
           <SearchButtonLabel className="button-label">Search</SearchButtonLabel>
@@ -22,6 +36,8 @@ export class SearchForm extends Component {
           autoComplete="off"
           autoFocus
           placeholder="Search images and photos"
+          value={this.state.query}
+          onChange={this.handleQueryChange}
         />
       </StyledSearchForm>
     );
