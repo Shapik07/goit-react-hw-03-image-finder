@@ -4,9 +4,10 @@ import { SearchForm } from 'components/Searchbar/SearchForm/SearchForm';
 
 export class SearchBar extends Component {
   render() {
+    const { handleQuerySubmit } = this.props;
     return (
       <StyledSearchBar className="searchbar">
-        <SearchForm />
+        <SearchForm handleQuerySubmit={handleQuerySubmit} />
       </StyledSearchBar>
     );
   }

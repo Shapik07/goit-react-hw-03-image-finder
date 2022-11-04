@@ -7,6 +7,10 @@ export class App extends Component {
     pictures: [],
   };
 
+  handleQuerySubmit = query => {
+    console.log(query);
+  };
+
   componentDidMount() {
     fetch(
       'https://pixabay.com/api/?q=cat&page=1&key=30097880-73ac2834789f98742941535c7&image_type=photo&orientation=horizontal&per_page=12'
@@ -16,10 +20,9 @@ export class App extends Component {
   }
 
   render() {
-    console.log(this.state.pictures);
     return (
       <>
-        <SearchBar />
+        <SearchBar handleQuerySubmit={this.handleQuerySubmit} />
 
         <GalleryList pictures={this.state.pictures}></GalleryList>
       </>
