@@ -4,8 +4,8 @@ import ImageGalleryItem from 'components/Searchbar/ImageGalleryItem/ImageGallery
 export const GalleryList = ({ pictures }) => {
   return (
     <ImageGallery>
-      {pictures.map(({ id, largeImageURL }) => (
-        <ImageGalleryItem id={id} link={largeImageURL} key={id} />
+      {pictures.map(({ id, webformatURL }) => (
+        <ImageGalleryItem id={id} link={webformatURL} key={id} />
       ))}
     </ImageGallery>
   );
