@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { SearchBar } from 'components/Searchbar/Searchbar';
 import { GalleryList } from 'components/Searchbar/ImageGallery/ImageGallery';
 
@@ -29,8 +31,10 @@ export class App extends Component {
     return (
       <>
         <SearchBar handleQuerySubmit={this.handleQuerySubmit} />
-
-        <GalleryList pictures={this.state.pictures}></GalleryList>
+        {this.state.pictures && (
+          <GalleryList pictures={this.state.pictures}></GalleryList>
+        )}
+        <ToastContainer />
       </>
     );
   }

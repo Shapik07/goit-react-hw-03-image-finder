@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { toast } from 'react-toastify';
+
 import { FaSearch } from 'react-icons/fa';
 import {
   SearchFormButton,
@@ -20,8 +22,10 @@ export class SearchForm extends Component {
     e.preventDefault();
 
     if (this.state.query.trim() === '') {
+      toast.warn('Please enter search data', { theme: 'colored' });
       return;
     }
+
     this.props.handleQuerySubmit(this.state.query);
 
     this.setState({ query: '' });
