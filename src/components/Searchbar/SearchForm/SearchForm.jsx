@@ -21,7 +21,7 @@ export class SearchForm extends Component {
     e.preventDefault();
 
     if (this.state.query.trim() === '') {
-      toast.info ('Please enter a request');
+      toast.info('Please enter a request');
       return;
     }
     this.props.handleQuerySubmit(this.state.query);
