@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import InfoMessage from 'components/Searchbar/Message/Message';
 import Loader from 'components/Searchbar/Loader/Loader';
 import imagesAPI from 'components/services/Pixabey-api';
-import ModalWindow from 'components/Searchbar/Modal/Modal';
 import { Section } from './App.styled';
 import { SearchBar } from 'components/Searchbar/Searchbar';
 import { GalleryList } from 'components/Searchbar/ImageGallery/ImageGallery';
