@@ -4,6 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import InfoMessage from 'components/Searchbar/Message/Message';
 import Loader from 'components/Searchbar/Loader/Loader';
 import imagesAPI from 'components/services/Pixabey-api';
+import ModalWindow from 'components/Searchbar/Modal/Modal';
+import { Button } from 'components/Searchbar/Button/Button';
 import { Section } from './App.styled';
 import { SearchBar } from 'components/Searchbar/Searchbar';
 import { GalleryList } from 'components/Searchbar/ImageGallery/ImageGallery';
@@ -12,8 +14,12 @@ export class App extends Component {
   state = {
     pictures: [],
     query: '',
+    page: 1,
+    perPage: 12,
     error: null,
     status: 'idle',
+    showModal: false,
+    largePicture: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -24,9 +30,9 @@ export class App extends Component {
 
       imagesAPI
         .PixabayAPI(query)
-        .then(pictures =>
-          this.setState({ pictures: pictures.hits, status: 'resolved' })
-        )
+        .then(pictures => {
+          this.setState({ pictures: pictures.hits, status: 'resolved' });
+        })
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
   }
@@ -35,8 +41,20 @@ export class App extends Component {
     this.setState({ query });
   };
 
+  loadMorePictures(query, page, perPage) {
+    console.log('hello');
+  }
+
+  openModal = image => {
+    this.setState({ showModal: true, largePicture: image });
+  };
+
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
+
   render() {
-    const { pictures, error, status } = this.state;
+    const { pictures, error, status, showModal, largePicture } = this.state;
 
     if (status === 'idle') {
       return (
@@ -72,7 +90,12 @@ export class App extends Component {
       return (
         <Section>
           <SearchBar handleQuerySubmit={this.handleQuerySubmit} />
-          <GalleryList pictures={pictures}></GalleryList>
+          <GalleryList
+            pictures={pictures}
+            onClick={this.openModal}
+          ></GalleryList>
+          {showModal && <ModalWindow largePicture={largePicture} />}
+          <Button onClick={this.loadMorePictures}>Load more...</Button>
           <ToastContainer />
         </Section>
       );

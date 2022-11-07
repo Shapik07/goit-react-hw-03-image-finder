@@ -1,14 +1,16 @@
-import { Component } from 'react';
 import { ListItem, Img } from './ImageGalleryItem.styled';
 
-class ImageGalleryItem extends Component {
-  render() {
-    return (
-      <ListItem className="gallery-item" key={this.props.id}>
-        <Img src={this.props.link} alt=" " />
-      </ListItem>
-    );
-  }
+function ImageGalleryItem({ itemData, onClick }) {
+  const { id, webformatURL, largeImageURL } = itemData;
+  return (
+    <ListItem
+      className="gallery-item"
+      key={id}
+      onClick={() => onClick({ largeImageURL })}
+    >
+      <Img src={webformatURL} alt=" " />
+    </ListItem>
+  );
 }
 
 export default ImageGalleryItem;

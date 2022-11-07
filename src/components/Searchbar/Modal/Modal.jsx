@@ -1,10 +1,11 @@
 import { Overlay, Modal } from './Modal.styled';
 
-function ModalWindow() {
+function ModalWindow({ largePicture }) {
+  console.log(largePicture);
   return (
-    <Overlay class="overlay">
-      <Modal class="modal">
-        <img src="" alt="" />
+    <Overlay className="overlay">
+      <Modal className="modal">
+        <img src={largePicture} alt="" />
       </Modal>
     </Overlay>
   );
