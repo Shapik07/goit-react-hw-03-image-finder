@@ -45,9 +45,8 @@ export class App extends Component {
 
           this.setState(prevState => ({
             pictures: [...prevState.pictures, ...pictures.hits],
+            status: 'resolved',
           }));
-
-          this.setState({ pictures: pictures.hits, status: 'resolved' });
         })
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
