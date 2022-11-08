@@ -1,8 +1,13 @@
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 
 import { Overlay, Modal } from './Modal.styled';
 
 class ModalWindow extends Component {
+  static propTypes = {
+    largePicture: PropTypes.string.isRequired,
+  };
+
   componentDidMount() {
     window.addEventListener('keydown', e => {
       if (e.code === 'Escape') {
@@ -18,10 +23,12 @@ class ModalWindow extends Component {
   };
 
   render() {
+    const { largePicture } = this.props;
+
     return (
       <Overlay className="overlay" onClick={this.handleBackdropClick}>
         <Modal className="modal">
-          <img src={this.props.largePicture} alt="" />
+          <img src={largePicture} alt="" />
         </Modal>
       </Overlay>
     );

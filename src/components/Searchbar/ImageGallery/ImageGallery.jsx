@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { ImageGallery } from './ImageGallery.style';
 import ImageGalleryItem from 'components/Searchbar/ImageGalleryItem/ImageGalleryItem';
 
@@ -11,7 +11,8 @@ export const GalleryList = ({ pictures, onClick }) => {
     </ImageGallery>
   );
 };
-// GalleryList.propTypes = {
-//   pictures: PropTypes.array.isRequired,
-//   onClick: PropTypes.func.isRequired,
-// };
+
+GalleryList.propTypes = {
+  pictures: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired,
+};

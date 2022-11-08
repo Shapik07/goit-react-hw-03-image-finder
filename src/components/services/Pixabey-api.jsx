@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 const BASE_URL = 'https://pixabay.com/api/';
 const KEY = '30097880-73ac2834789f98742941535c7';
 
@@ -22,3 +23,9 @@ function PixabayAPI(query, page, perPage) {
 const api = { PixabayAPI };
 
 export default api;
+
+PixabayAPI.propTypes = {
+  query: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
+  perPage: PropTypes.number.isRequired,
+};

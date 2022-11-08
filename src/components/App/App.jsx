@@ -79,7 +79,7 @@ export class App extends Component {
       return (
         <Section>
           <SearchBar handleQuerySubmit={this.handleQuerySubmit} />
-          <InfoMessage message={'Введите запрос'} />
+          <InfoMessage message={'Please enter a request'} />
           <ToastContainer />
         </Section>
       );
