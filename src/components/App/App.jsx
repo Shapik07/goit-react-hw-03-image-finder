@@ -43,11 +43,11 @@ export class App extends Component {
             this.setState({ showButton: false });
           }
 
-          this.setState({ pictures: pictures.hits, status: 'resolved' });
-
           this.setState(prevState => ({
             pictures: [...prevState.pictures, ...pictures.hits],
           }));
+
+          this.setState({ pictures: pictures.hits, status: 'resolved' });
         })
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
