@@ -1,7 +1,7 @@
 import { Overlay, Modal } from './Modal.styled';
 
-function ModalWindow({ largePicture }) {
-  console.log(largePicture);
+function ModalWindow({largePicture}) {
+  // console.log(largePicture);
   return (
     <Overlay className="overlay">
       <Modal className="modal">

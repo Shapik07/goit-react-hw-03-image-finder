@@ -45,7 +45,8 @@ export class App extends Component {
     console.log('hello');
   }
 
-  openModal = image => {
+  openModal = (image) => {
+    console.log(image)
     this.setState({ showModal: true, largePicture: image });
   };
 

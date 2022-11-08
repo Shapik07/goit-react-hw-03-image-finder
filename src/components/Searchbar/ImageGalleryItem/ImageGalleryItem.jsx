@@ -6,7 +6,7 @@ function ImageGalleryItem({ itemData, onClick }) {
     <ListItem
       className="gallery-item"
       key={id}
-      onClick={() => onClick({ largeImageURL })}
+      onClick={() => onClick(largeImageURL)}
     >
       <Img src={webformatURL} alt=" " />
     </ListItem>
