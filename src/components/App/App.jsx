@@ -1,9 +1,9 @@
 import { Component } from 'react';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import InfoMessage from 'components/Searchbar/Message/Message';
 import Loader from 'components/Searchbar/Loader/Loader';
-import imagesAPI from 'components/services/Pixabey-api';
+import API from 'components/services/Pixabey-api';
 import ModalWindow from 'components/Searchbar/Modal/Modal';
 import { Button } from 'components/Searchbar/Button/Button';
 import { Section } from './App.styled';
@@ -20,33 +20,44 @@ export class App extends Component {
     status: 'idle',
     showModal: false,
     largePicture: '',
+    showButton: false,
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     const prevQuery = prevState.query;
-    const { query } = this.state;
-    if (prevQuery !== query) {
+    const prevPage = prevState.page;
+    const { query, page, perPage } = this.state;
+    if (prevQuery !== query || prevPage !== page) {
       this.setState({ status: 'pending' });
 
-      imagesAPI
-        .PixabayAPI(query)
+      API.PixabayAPI(query, page, perPage)
         .then(pictures => {
+          if (pictures.total === 0) {
+            this.setState({ status: 'idle' });
+            return toast.warn('Woops, nothing found for your request');
+          }
+
+          if (pictures.total > perPage) {
+            this.setState({ showButton: true });
+          } else {
+            this.setState({ showButton: false });
+          }
+
           this.setState({ pictures: pictures.hits, status: 'resolved' });
+
+          this.setState(prevState => ({
+            pictures: [...prevState.pictures, ...pictures.hits],
+          }));
         })
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
   }
 
   handleQuerySubmit = query => {
-    this.setState({ query });
+    this.setState({ query, page: 1 });
   };
 
-  loadMorePictures(query, page, perPage) {
-    console.log('hello');
-  }
-
-  openModal = (image) => {
-    console.log(image)
+  openModal = image => {
     this.setState({ showModal: true, largePicture: image });
   };
 
@@ -54,8 +65,15 @@ export class App extends Component {
     this.setState({ showModal: false });
   };
 
+  loadMorePictures = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
+  };
+
   render() {
-    const { pictures, error, status, showModal, largePicture } = this.state;
+    const { pictures, error, status, showModal, largePicture, showButton } =
+      this.state;
 
     if (status === 'idle') {
       return (
@@ -95,8 +113,15 @@ export class App extends Component {
             pictures={pictures}
             onClick={this.openModal}
           ></GalleryList>
-          {showModal && <ModalWindow largePicture={largePicture} />}
-          <Button onClick={this.loadMorePictures}>Load more...</Button>
+          {showModal && (
+            <ModalWindow
+              closeModal={this.closeModal}
+              largePicture={largePicture}
+            />
+          )}
+          {showButton && (
+            <Button onClick={this.loadMorePictures}>Load more...</Button>
+          )}
           <ToastContainer />
         </Section>
       );
