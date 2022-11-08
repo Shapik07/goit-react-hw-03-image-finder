@@ -53,7 +53,7 @@ export class App extends Component {
   }
 
   handleQuerySubmit = query => {
-    this.setState({ query, page: 1 });
+    this.setState({ query, page: 1, pictures: [] });
   };
 
   openModal = image => {
