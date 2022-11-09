@@ -27,6 +27,7 @@ export class App extends Component {
     const prevQuery = prevState.query;
     const prevPage = prevState.page;
     const { query, page, perPage } = this.state;
+
     if (prevQuery !== query || prevPage !== page) {
       this.setState({ status: 'pending' });
 
@@ -74,10 +75,12 @@ export class App extends Component {
     const { pictures, error, status, showModal, largePicture, showButton } =
       this.state;
 
+    const { handleQuerySubmit, openModal, closeModal, loadMorePictures } = this;
+
     if (status === 'idle') {
       return (
         <Section>
-          <SearchBar handleQuerySubmit={this.handleQuerySubmit} />
+          <SearchBar handleQuerySubmit={handleQuerySubmit} />
           <InfoMessage message={'Please enter a request'} />
           <ToastContainer />
         </Section>
@@ -87,11 +90,8 @@ export class App extends Component {
     if (status === 'pending') {
       return (
         <Section>
-          <SearchBar handleQuerySubmit={this.handleQuerySubmit} />
-          <GalleryList
-            pictures={pictures}
-            onClick={this.openModal}
-          ></GalleryList>
+          <SearchBar handleQuerySubmit={handleQuerySubmit} />
+          <GalleryList pictures={pictures} onClick={openModal}></GalleryList>
           <Loader />
           <ToastContainer />
         </Section>
@@ -101,7 +101,7 @@ export class App extends Component {
     if (status === 'rejected') {
       return (
         <Section>
-          <SearchBar handleQuerySubmit={this.handleQuerySubmit} />
+          <SearchBar handleQuerySubmit={handleQuerySubmit} />
           <InfoMessage message={error.message} />
           <ToastContainer />
         </Section>
@@ -111,19 +111,13 @@ export class App extends Component {
     if (status === 'resolved') {
       return (
         <Section>
-          <SearchBar handleQuerySubmit={this.handleQuerySubmit} />
-          <GalleryList
-            pictures={pictures}
-            onClick={this.openModal}
-          ></GalleryList>
+          <SearchBar handleQuerySubmit={handleQuerySubmit} />
+          <GalleryList pictures={pictures} onClick={openModal}></GalleryList>
           {showModal && (
-            <ModalWindow
-              closeModal={this.closeModal}
-              largePicture={largePicture}
-            />
+            <ModalWindow closeModal={closeModal} largePicture={largePicture} />
           )}
           {showButton && (
-            <Button onClick={this.loadMorePictures}>Load more...</Button>
+            <Button onClick={loadMorePictures}>Load more...</Button>
           )}
           <ToastContainer />
         </Section>
