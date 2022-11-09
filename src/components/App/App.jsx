@@ -88,6 +88,10 @@ export class App extends Component {
       return (
         <Section>
           <SearchBar handleQuerySubmit={this.handleQuerySubmit} />
+          <GalleryList
+            pictures={pictures}
+            onClick={this.openModal}
+          ></GalleryList>
           <Loader />
           <ToastContainer />
         </Section>
