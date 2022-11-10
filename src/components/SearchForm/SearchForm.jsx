@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { FaSearch } from 'react-icons/fa';
 import {
@@ -11,6 +12,10 @@ import {
 export class SearchForm extends Component {
   state = {
     query: '',
+  };
+
+  static propTypes = {
+    handleQuerySubmit: PropTypes.func.isRequired,
   };
 
   handleQueryChange = e => {
