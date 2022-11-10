@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { StyledSearchBar } from './Searchbar.styled';
-import { SearchForm } from 'components/Searchbar/SearchForm/SearchForm';
+import { SearchForm } from 'components/SearchForm/SearchForm';
 
 export class SearchBar extends Component {
   render() {

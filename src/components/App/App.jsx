@@ -1,14 +1,14 @@
 import { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import InfoMessage from 'components/Searchbar/Message/Message';
-import Loader from 'components/Searchbar/Loader/Loader';
-import API from 'components/services/Pixabey-api';
-import ModalWindow from 'components/Searchbar/Modal/Modal';
-import { Button } from 'components/Searchbar/Button/Button';
+import InfoMessage from 'components/Message/Message';
+import Loader from 'components/Loader/Loader';
+import API from 'services/Pixabey-api';
+import ModalWindow from 'components/Modal/Modal';
+import { Button } from 'components/Button/Button';
 import { Section } from './App.styled';
 import { SearchBar } from 'components/Searchbar/Searchbar';
-import { GalleryList } from 'components/Searchbar/ImageGallery/ImageGallery';
+import { GalleryList } from 'components/ImageGallery/ImageGallery';
 
 export class App extends Component {
   state = {

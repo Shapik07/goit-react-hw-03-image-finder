@@ -8,19 +8,27 @@ class ModalWindow extends Component {
     largePicture: PropTypes.string.isRequired,
   };
 
-  componentDidMount() {
-    window.addEventListener('keydown', e => {
-      if (e.code === 'Escape') {
-        this.props.closeModal();
-      }
-    });
-  }
-
   handleBackdropClick = e => {
+    console.log('click');
     if (e.currentTarget === e.target) {
       this.props.closeModal();
     }
   };
+
+  handleEscKeydown = e => {
+    console.log('keydown');
+    if (e.code === 'Escape') {
+      this.props.closeModal();
+    }
+  };
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleEscKeydown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleEscKeydown);
+  }
 
   render() {
     const { largePicture } = this.props;
