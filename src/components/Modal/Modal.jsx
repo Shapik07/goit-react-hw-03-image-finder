@@ -9,14 +9,12 @@ class ModalWindow extends Component {
   };
 
   handleBackdropClick = e => {
-    console.log('click');
     if (e.currentTarget === e.target) {
       this.props.closeModal();
     }
   };
 
   handleEscKeydown = e => {
-    console.log('keydown');
     if (e.code === 'Escape') {
       this.props.closeModal();
     }
